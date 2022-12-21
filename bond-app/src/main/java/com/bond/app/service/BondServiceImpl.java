@@ -67,11 +67,11 @@ public class BondServiceImpl implements BondService {
 
         } catch (BizException e) {
             if(e.getCause()!=null){
-                //业务验证出错
-                logger.warn(e.getError().getErrorMessageForOperator());
-            }else{
                 //系统环境出错
                 logger.error(e.getError().getErrorMessageForOperator());
+            }else{
+                //业务验证出错
+                logger.warn(e.getError().getErrorMessageForOperator());
             }
             String errorCode = e.getError().getErrorCode();
             String errorMessage = e.getError().getErrorMessageForCaller();

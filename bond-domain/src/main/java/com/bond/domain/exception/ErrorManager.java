@@ -1,5 +1,8 @@
 package com.bond.domain.exception;
 
+import com.bond.domain.exception.net.strategy.BindErrorStrategy;
+import com.bond.domain.exception.net.strategy.NetErrorStrategy;
+
 /**
  * @author anzj
  * @date 2022/12/19 18:06
@@ -21,5 +24,11 @@ public class ErrorManager {
         StringBuffer stringBuffer = new StringBuffer();
         return stringBuffer.append(sysMessage).append(tradeMessage).append(errorMessage).toString();
     }
+
+
+    public void parse(Throwable t, String url, Integer readTimeout, Integer connectTimeout){
+
+    }
+
 
 }

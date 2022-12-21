@@ -1,4 +1,6 @@
-package com.bond.domain.exception;
+package com.bond.domain.exception.net;
+
+import com.bond.domain.exception.Error;
 
 /**
  * @author anzj

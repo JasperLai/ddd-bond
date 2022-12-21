@@ -2,7 +2,7 @@ package com.bond.infrastructure.facadeimpl;
 
 import com.bond.domain.exception.BizException;
 import com.bond.domain.exception.Error;
-import com.bond.domain.exception.NetErrorParser;
+import com.bond.domain.exception.net.NetErrorManager;
 import com.bond.domain.model.trade.Order;
 import com.bond.domain.model.trade.PaymentAccount;
 import com.bond.domain.model.trade.ability.facade.PaymentFacade;
@@ -67,7 +67,7 @@ public class PaymentFacadeImpl implements PaymentFacade {
             return result;
         } catch (RemoteException e) {
             Throwable t = e.getCause();
-            Error error = NetErrorParser.parse(t,url,3000,3000);
+            Error error = NetErrorManager.parse(t,url,3000,3000);
             throw BizException.buildBizException(error,t);
         }
 
