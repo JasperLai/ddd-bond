@@ -1,7 +1,7 @@
 package com.bond.infrastructure.datamasking;
 
 import com.alibaba.fastjson.JSON;
-import io.github.aixmi.tool.datamasking.strategy.HashMask;
+import com.bond.infrastructure.datamasking.strategy.HashMask;
 
 /**
  * 脱敏工具类

@@ -28,6 +28,7 @@ public class Bond {
         if(Long.parseLong(today) < Long.parseLong(issueStartDate) || Long.parseLong(issueEndDate) < Long.parseLong(today)){
             throw new BizException(ErrorConstant.ERR_VALIDATION_NOT_RELEASING);
         }
+
     }
 
 

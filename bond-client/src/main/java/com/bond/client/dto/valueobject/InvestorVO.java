@@ -1,5 +1,7 @@
 package com.bond.client.dto.valueobject;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotNull;
 
 /**
@@ -15,6 +17,7 @@ public class InvestorVO {
     /**
      * 身份证号码
      */
+    @Length(max=5,min=1)
     private String idCardNO;
     /**
      * 电话号码

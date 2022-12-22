@@ -2,6 +2,7 @@ package com.bond.infrastructure.facadeimpl;
 
 import com.bond.domain.exception.BizException;
 import com.bond.domain.exception.Error;
+import com.bond.domain.exception.net.NetErrorContext;
 import com.bond.domain.exception.net.NetErrorManager;
 import com.bond.domain.model.trade.Order;
 import com.bond.domain.model.trade.PaymentAccount;
@@ -9,6 +10,8 @@ import com.bond.domain.model.trade.ability.facade.PaymentFacade;
 import com.bond.domain.model.trade.type.PaymentResult;
 import com.bond.infrastructure.common.Constant;
 import com.bond.infrastructure.external.payment.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.rmi.RemoteException;
@@ -19,6 +22,8 @@ import java.rmi.RemoteException;
  */
 @Component
 public class PaymentFacadeImpl implements PaymentFacade {
+
+    private static final Logger logger = LoggerFactory.getLogger(PaymentFacadeImpl.class);
 
     @Override
     public PaymentResult Pay(Order order, PaymentAccount sourceAccount, PaymentAccount targetAccount) {
@@ -44,6 +49,7 @@ public class PaymentFacadeImpl implements PaymentFacade {
             }
         } catch (RemoteException e) {
             //支付失败则查询订单支付情况
+            logger.error("订单支付出现错误");
             query(order);
         }
         return result;
@@ -67,7 +73,12 @@ public class PaymentFacadeImpl implements PaymentFacade {
             return result;
         } catch (RemoteException e) {
             Throwable t = e.getCause();
-            Error error = NetErrorManager.parse(t,url,3000,3000);
+            NetErrorContext context = new NetErrorContext();
+            context.setConnectTimeout(3000);
+            context.setThrowable(t);
+            context.setUrl(url);
+            context.setReadTimeout(3000);
+            Error error = NetErrorManager.parse(context);
             throw BizException.buildBizException(error,t);
         }
 

@@ -40,7 +40,7 @@ public class BondController {
 
         SubscribeResult result = bondService.subscribe(investorVO,bondVO,tradeDataVO);
 
-        logger.info("认购响应参数",response);
+        logger.info("认购响应参数[{}]",response);
         return response;
     }
 }

@@ -1,7 +1,5 @@
 package com.bond.domain.exception;
 
-import com.sun.xml.internal.bind.v2.model.runtime.RuntimeNonElement;
-
 /**
  * @author anzj
  * @date 2022/12/19 11:05

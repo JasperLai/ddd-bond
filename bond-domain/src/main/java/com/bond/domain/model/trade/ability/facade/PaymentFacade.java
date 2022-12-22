@@ -12,4 +12,8 @@ public interface PaymentFacade {
 
      PaymentResult Pay(Order order, PaymentAccount sourceAccount, PaymentAccount targetAccount);
 
+     /**
+      * 批量支付
+      */
+
 }

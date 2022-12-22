@@ -12,9 +12,11 @@ import com.bond.client.dto.valueobject.InvestorVO;
 import com.bond.client.dto.valueobject.TradeDataVO;
 import com.bond.domain.exception.BizException;
 import com.bond.domain.exception.ErrorConstant;
+import com.bond.domain.exception.ErrorManager;
 import com.bond.domain.model.trade.Bond;
 import com.bond.domain.model.trade.Holding;
 import com.bond.domain.model.trade.Inventory;
+import com.bond.domain.model.trade.ability.rule.OpeningTimeCheckRule;
 import com.bond.domain.model.trade.repository.BondRepository;
 import com.bond.domain.model.trade.repository.HoldingRepository;
 import com.bond.domain.model.trade.repository.InventoryRepository;
@@ -41,11 +43,14 @@ public class BondServiceImpl implements BondService {
     private HoldingRepository holdingRepository;
     @Autowired
     private SubscribeTransaction subscribeTransaction;
+    @Autowired
+    private OpeningTimeCheckRule openingTimeCheckRule;
 
     @Override
     public SubscribeResult subscribe(InvestorVO investorVO, BondVO bondVO, TradeDataVO tradeDataVO) {
         SubscribeResult subscribeResult = new SubscribeResult();
         try {
+            /*业务逻辑编排*/
             // step1 输入参数校验 Fluent-Validator + Hibernate-Validator
             validateParameter(investorVO,bondVO,tradeDataVO);
             logger.info("输入参数验证完成");
@@ -53,6 +58,8 @@ public class BondServiceImpl implements BondService {
             Bond bond = bondRepository.find(bondVO.getBondCode());
             bond.checkIssueStatus();
             logger.info("债券[{}]发行期验证完成,在发行期",bond.getBondCode());
+            openingTimeCheckRule.check();
+            logger.info("营业时间检查完成");
             // step3 业务执行逻辑 3.1 第三方服务调用ACL 3.2 repository调用存储服务
             Inventory inventory = inventoryRepository.find(bondVO.getBondCode());
             inventory.reduce(tradeDataVO.getFaceValue());
@@ -73,7 +80,8 @@ public class BondServiceImpl implements BondService {
                 //业务验证出错
                 logger.warn(e.getError().getErrorMessageForOperator());
             }
-            String errorCode = e.getError().getErrorCode();
+            //系统编码+交易编码+错误编码
+            String errorCode = ErrorManager.buildErrorCode("","",e.getError().getErrorCode()) ;
             String errorMessage = e.getError().getErrorMessageForCaller();
             subscribeResult.buildFailedResult(errorCode,errorMessage);
             return subscribeResult;

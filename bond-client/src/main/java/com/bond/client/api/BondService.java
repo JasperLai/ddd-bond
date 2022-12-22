@@ -14,4 +14,9 @@ public interface BondService {
      * 债券认购
      */
     SubscribeResult subscribe(InvestorVO investorVO, BondVO bondVO, TradeDataVO tradeDataVO);
+
+    /**
+     * 兑付
+     */
+//    void cash();
 }

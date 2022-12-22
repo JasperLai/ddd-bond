@@ -1,9 +1,9 @@
 package com.bond.infrastructure.datamasking;
 
-import io.github.aixmi.tool.datamasking.strategy.EmailMask;
-import io.github.aixmi.tool.datamasking.strategy.HashMask;
-import io.github.aixmi.tool.datamasking.strategy.NameMask;
-import io.github.aixmi.tool.datamasking.strategy.PartMask;
+import com.bond.infrastructure.datamasking.strategy.EmailMask;
+import com.bond.infrastructure.datamasking.strategy.HashMask;
+import com.bond.infrastructure.datamasking.strategy.NameMask;
+import com.bond.infrastructure.datamasking.strategy.PartMask;
 
 /**
  * 脱敏类型
