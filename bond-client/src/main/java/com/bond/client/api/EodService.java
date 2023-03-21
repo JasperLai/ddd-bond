@@ -15,7 +15,7 @@ public interface EodService {
     /**
      * 日终调度app service定义
      */
-    EodResult executeTask(EodVO v);
+    EodResult executeTaskByGroup(EodVO v);
 
 
 }

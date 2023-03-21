@@ -1,9 +1,5 @@
 package com.bond.domain.model.report.types;
 
-import com.bond.domain.model.report.types.ReportNode;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.List;
 
 //DOMAIN OBJECT

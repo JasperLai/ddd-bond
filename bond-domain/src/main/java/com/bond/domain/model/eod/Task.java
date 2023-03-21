@@ -4,7 +4,7 @@ public class Task{
 
     int taskStatus; //任务状态
     String taskId; // 任务编号
-    int taskType;  // FC/DE/
+    int groupId;  // FC/DE/
 
     public int getTaskStatus() {
         return taskStatus;
@@ -22,12 +22,12 @@ public class Task{
         this.taskId = taskId;
     }
 
-    public int getTaskType() {
-        return taskType;
+    public int getGroudId() {
+        return groupId;
     }
 
-    public void setTaskType(int taskType) {
-        this.taskType = taskType;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
 

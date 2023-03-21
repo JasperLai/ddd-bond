@@ -2,6 +2,7 @@ package com.bond.domain.model.eod.repository;
 
 
 import com.bond.domain.model.eod.Task;
+import com.bond.domain.model.eod.TaskGroup;
 
 import java.util.List;
 import java.util.Queue;
@@ -12,11 +13,10 @@ import java.util.Queue;
  */
 public interface TaskRepository {
 
-    Task find(String id);
+    Task findTaskById(String id);
     List<Task> findTaskByStatus(int taskStatus);
-    List<Task> findTaskByType(int tasktype);
+    TaskGroup findTaskGroupById(int id);
 
     void updateTaskStatus(String taskId,boolean status);
-    Queue<Task> initTaskAtBeginning();
 
 }

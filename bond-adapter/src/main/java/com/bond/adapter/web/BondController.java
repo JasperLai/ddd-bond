@@ -1,6 +1,7 @@
 package com.bond.adapter.web;
 
 import com.bond.client.api.BondService;
+import com.bond.client.api.EodService;
 import com.bond.client.dto.protocol.request.SubscribeRequest;
 import com.bond.client.dto.protocol.response.SubscribeResponse;
 import com.bond.client.dto.result.SubscribeResult;
@@ -27,6 +28,28 @@ public class BondController {
 
     @Autowired
     private BondService bondService;
+
+    @Autowired
+    private EodService eodService;
+
+
+    //EOD入口示例，此处和BTSS日终调度接口入参保持一致
+    @PostMapping("/eod/execute")
+    @ResponseBody
+    public SubscribeResponse execute(SubscribeRequest request){
+        logger.info("认购输入参数[{}]",request);
+        SubscribeResponse response = new SubscribeResponse();
+
+        BondVO bondVO = request.getBondVO();
+        InvestorVO investorVO = request.getInvestorVO();
+        TradeDataVO tradeDataVO = request.getTradeDataVO();
+
+        SubscribeResult result = bondService.subscribe(investorVO,bondVO,tradeDataVO);
+
+        logger.info("认购响应参数[{}]",response);
+        return response;
+    }
+
 
     @PostMapping("/bond/subscribe")
     @ResponseBody

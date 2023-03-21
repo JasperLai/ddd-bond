@@ -1,48 +1,43 @@
 package com.bond.app.service;
 
-import com.bond.app.TaskFactory;
-import com.bond.app.taskExecutor.TaskExecutor;
-import com.bond.app.transaction.EodTradeTransaction;
-import com.bond.client.api.EodService;
 import com.bond.client.dto.result.EodResult;
 import com.bond.client.dto.valueobject.EodVO;
 import com.bond.domain.model.eod.Task;
-import com.bond.domain.model.eod.ability.EodManager;
+import com.bond.domain.model.eod.TaskGroup;
+import com.bond.domain.model.eod.ability.ExecuteService;
+import com.bond.domain.model.eod.ability.ScheduleService;
+import com.bond.domain.model.eod.ability.factory.TaskFactory;
 import com.bond.domain.model.eod.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Queue;
-
 // app service
-public class EodServiceImpl implements EodService {
+public class EodServiceImpl implements com.bond.client.api.EodService {
     @Autowired
-    EodManager manager;  //对应DDD service_rules, 反应队列调度规则
+    ScheduleService scheduleService;  //调度服务
 
     @Autowired
-    EodTradeTransaction eodTradeTransaction;  //app service 子服务
+    ExecuteService executeService;  //调度服务
     @Autowired
     TaskRepository taskRepo;  //任务REPO，负责读取任务相关表结构
+
+    @Autowired
+    TaskFactory taskFactory;
     @Override
-    public EodResult executeTask(EodVO v) {
+    public EodResult executeTaskByGroup(EodVO v) {
         try {
-            if (v.type == 0) { //任务类型0
-                //数据库读取任务状态，构建任务队列，需要考虑任务组合下各任务的前后关系
-                manager.handleDayEndTask(taskRepo.findTaskByType(v.type));
+            //Step 1  获得任务组
+            TaskGroup group = taskRepo.findTaskGroupById(v.groupId);
 
-                //根据任务类型创建对应执行器，并更新任务状态
-                //TODO 如果需要改为多线程，修改while逻辑即可
-                while(manager.peekFromWaiting()!=null){
-                    Task t = manager.pollFromWaiting();
-                    TaskExecutor executor = TaskFactory.getInstance().getTaskExecutor(t.getTaskId());
-                    int result = executor.execute();
-                    t.setTaskStatus(result);
-                    manager.updateTaskStatus(t,taskRepo);
-                    //throw exception
-                }
+            //Step 2  加入调度任务队列
+            scheduleService.addTaskForExecute(group);
 
-            } else if(v.type == 1){
-
+            //根据任务类型创建对应执行器，并更新任务状态
+            while(scheduleService.peekFromWaiting() != null){
+                Task t = scheduleService.pollFromWaiting();
+                executeService.execute(t);
             }
+
+
         }catch (Exception e){
             //异常需要定义EOD_EXCEPTION
         }

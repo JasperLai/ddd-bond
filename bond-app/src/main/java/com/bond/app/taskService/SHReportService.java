@@ -17,7 +17,7 @@ import java.util.List;
 //taskService类似transaction，app service的子服务，不同点是可以选择单独对外暴露
 //该服务负责将文件生成，并入库
 @Component
-public class SHReportService implements GenerateReportFileService{
+public class SHReportService {
 
     OpenAccRepo repo;
 
@@ -26,23 +26,23 @@ public class SHReportService implements GenerateReportFileService{
     FileOutputStream fs;
 
     public boolean handleOpenAccData(Date date){
-        Report openAccReport = new Report(0,0);
-
-//        openAccReport.setNodes(repo.getNodes(date));
-        generateReportFile(openAccReport,repo);
-        if(openAccReport.getReportType() == 0) {
-            //以文件方式报送
-            openAccReport.setFileName("XXXX"); //TODO 从配置文件加载
-            File f = generateReportFile(openAccReport, date,repo);
-            //报送文件信息入表
-            reportRepo.savePath(f.getAbsoluteFile(),date);
-        }else if (openAccReport.getReportType() == 1){
-            //以报文报送
-            Object msg = new Object(); //json/xml数据示例
-            reportRepo.saveMessage(msg,date);
-        }
-
-        //TODO 也可以考虑save openAccReport,便于核对错误。
+//        Report openAccReport = new Report(0,0);
+//
+////        openAccReport.setNodes(repo.getNodes(date));
+//        generateReportFile(openAccReport,repo);
+//        if(openAccReport.getReportType() == 0) {
+//            //以文件方式报送
+//            openAccReport.setFileName("XXXX"); //TODO 从配置文件加载
+//            File f = generateReportFile(openAccReport, date,repo);
+//            //报送文件信息入表
+//            reportRepo.savePath(f.getAbsoluteFile(),date);
+//        }else if (openAccReport.getReportType() == 1){
+//            //以报文报送
+//            Object msg = new Object(); //json/xml数据示例
+//            reportRepo.saveMessage(msg,date);
+//        }
+//
+//        //TODO 也可以考虑save openAccReport,便于核对错误。
 
 
         return true;
@@ -61,11 +61,11 @@ public class SHReportService implements GenerateReportFileService{
     private File generateReportFile(Report r, Date d){
         int start;
         int end;
-        File f = new File();
-        for() {
-            ArrayList<OpenAccNode> nodes = repo.getNodes(start, end);
-            FileOutputStream fs = write(f, nodes);
-        }
+//        File f = new File();
+//        for() {
+//            ArrayList<OpenAccNode> nodes = repo.getNodes(start, end);
+//            FileOutputStream fs = write(f, nodes);
+//        }
         return null;
     }
 
