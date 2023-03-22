@@ -1,4 +1,4 @@
-package com.bond.domain.model.gateway.types;
+package com.bond.domain.model.proxy.types;
 
 //元数据，组成节点的数据单元
 public interface ReportField {

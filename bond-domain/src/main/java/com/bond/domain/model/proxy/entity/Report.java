@@ -1,6 +1,6 @@
-package com.bond.domain.model.gateway.entity;
+package com.bond.domain.model.proxy.entity;
 
-import com.bond.domain.model.gateway.types.ReportNode;
+import com.bond.domain.model.proxy.types.ReportNode;
 
 import java.util.List;
 

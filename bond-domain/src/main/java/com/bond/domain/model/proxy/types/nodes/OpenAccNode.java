@@ -1,8 +1,8 @@
-package com.bond.domain.model.gateway.types.nodes;
+package com.bond.domain.model.proxy.types.nodes;
 
-import com.bond.domain.model.gateway.types.ReportNode;
-import com.bond.domain.model.gateway.types.field.EscrowAccountField;
-import com.bond.domain.model.gateway.types.field.OpenAccDateField;
+import com.bond.domain.model.proxy.types.ReportNode;
+import com.bond.domain.model.proxy.types.field.EscrowAccountField;
+import com.bond.domain.model.proxy.types.field.OpenAccDateField;
 
 public class OpenAccNode extends ReportNode {
     OpenAccDateField openAccDate;

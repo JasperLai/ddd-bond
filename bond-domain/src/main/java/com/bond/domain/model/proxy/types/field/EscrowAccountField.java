@@ -1,6 +1,6 @@
-package com.bond.domain.model.gateway.types.field;
+package com.bond.domain.model.proxy.types.field;
 
-import com.bond.domain.model.gateway.types.ReportField;
+import com.bond.domain.model.proxy.types.ReportField;
 
 public class EscrowAccountField implements ReportField {
 

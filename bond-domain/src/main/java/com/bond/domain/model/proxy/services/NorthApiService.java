@@ -1,8 +1,8 @@
-package com.bond.domain.model.gateway.services;
+package com.bond.domain.model.proxy.services;
 
 
 //中债直接下发请求处理，包括资格管理控制，机动额度分配，系统状态切换通知，文件下载通知
-public class CCDCCmdService {
+public class NorthApiService {
 
     public void handleSaleAuthority(){
         //TODO 资格管理控制，通过调用交易模块提供的资格控制接口修改销售资格和机动额度资格

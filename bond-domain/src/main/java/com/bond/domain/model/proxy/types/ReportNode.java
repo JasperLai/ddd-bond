@@ -1,4 +1,4 @@
-package com.bond.domain.model.gateway.types;
+package com.bond.domain.model.proxy.types;
 
 //报送节点数据，可以定义一个字符串，也可以是一个XML块，或者一个Json串
 public abstract class ReportNode {
