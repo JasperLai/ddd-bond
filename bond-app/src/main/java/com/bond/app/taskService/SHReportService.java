@@ -1,16 +1,14 @@
 package com.bond.app.taskService;
 
-import com.bond.domain.model.report.repository.BaseRepo;
-import com.bond.domain.model.report.types.Report;
-import com.bond.domain.model.report.repository.OpenAccRepo;
-import com.bond.domain.model.report.repository.reportRepo;
-import com.bond.domain.model.report.types.ReportNode;
-import com.bond.domain.model.report.types.nodes.OpenAccNode;
+import com.bond.domain.model.datasource.repository.BaseRepo;
+import com.bond.domain.model.gateway.entity.Report;
+import com.bond.domain.model.datasource.repository.OpenAccRepo;
+import com.bond.domain.model.datasource.repository.reportRepo;
+import com.bond.domain.model.gateway.types.ReportNode;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

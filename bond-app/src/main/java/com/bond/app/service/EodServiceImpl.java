@@ -2,12 +2,12 @@ package com.bond.app.service;
 
 import com.bond.client.dto.result.EodResult;
 import com.bond.client.dto.valueobject.EodVO;
-import com.bond.domain.model.eod.Task;
-import com.bond.domain.model.eod.TaskGroup;
-import com.bond.domain.model.eod.ability.ExecuteService;
-import com.bond.domain.model.eod.ability.ScheduleService;
-import com.bond.domain.model.eod.ability.factory.TaskFactory;
-import com.bond.domain.model.eod.repository.TaskRepository;
+import com.bond.domain.model.schedule.Task;
+import com.bond.domain.model.schedule.TaskGroup;
+import com.bond.domain.model.schedule.ability.ExecuteService;
+import com.bond.domain.model.schedule.ability.ScheduleService;
+import com.bond.domain.model.schedule.ability.factory.TaskFactory;
+import com.bond.domain.model.schedule.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 // app service
@@ -31,7 +31,7 @@ public class EodServiceImpl implements com.bond.client.api.EodService {
             //Step 2  加入调度任务队列
             scheduleService.addTaskForExecute(group);
 
-            //根据任务类型创建对应执行器，并更新任务状态
+            //Step 3
             while(scheduleService.peekFromWaiting() != null){
                 Task t = scheduleService.pollFromWaiting();
                 executeService.execute(t);
