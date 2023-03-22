@@ -1,23 +1,16 @@
 package com.bond.domain.model.report.entity;
 
-import com.alibaba.fastjson.JSONObject;
-import com.bond.domain.model.report.types.SubmissionId;
-
 import java.util.Date;
 
+public class DataReport {
 
-//对应一个文件，或者一条实时数据报文提交
-//日终提交多个文件，则会有多个submission在聚合根中
-public class DataSubmission {
-
-    private String submissionId;
+    private String reportId;
     private Date submissionTime;
-
     private String submissionData;
 
 
-    public DataSubmission(String id, Date time, String data) {
-        submissionId = id;
+    public DataReport(String id, Date time, String data) {
+        reportId = id;
         submissionTime = time;
         submissionData = data;
     }

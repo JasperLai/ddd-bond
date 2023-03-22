@@ -1,11 +1,9 @@
 package com.bond.client.api;
 
-import java.io.File;
-
 /**
  * 供日终模块调用的接入API
  */
-public interface GatewaySouthApi {
+public interface ProxySouthApi {
 
     public boolean register(String senderId, String frontId,int... protocol);
     //日终交易类

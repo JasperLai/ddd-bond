@@ -3,7 +3,7 @@ package com.bond.client.api;
 /**
  * 供前置模块调用的接入API
  */
-public interface GatewayNorthApi {
+public interface ProxyNorthApi {
     //日终接口
     public void handleReportFeedBackFile(String filePath, String frontId);
 

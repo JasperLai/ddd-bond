@@ -1,6 +1,6 @@
 package com.bond.domain.model.report.ability.services;
 
-import com.bond.domain.model.report.entity.DataSubmission;
+import com.bond.domain.model.report.entity.DataReport;
 import com.bond.domain.model.report.repository.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,11 +18,9 @@ public class DataSourceServiceImpl implements DataSourceService{
     }
     @Override
     public ArrayList<String> getAllFileInfo() {
-        DataSubmission openAccDS =  repo.findOpenAccountInfo();
-        DataSubmission allInfoDS =  repo.findAllInfo();
-
+        DataReport openAccDS =  repo.findOpenAccountInfo();
+        DataReport allInfoDS =  repo.findAllInfo();
         //convert to Arraylist,每一条都是一个json Array
-
         return null;
     }
 
