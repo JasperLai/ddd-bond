@@ -1,6 +1,5 @@
 package com.bond.adapter.web;
 
-import com.bond.client.api.BondService;
 import com.bond.client.api.EodService;
 import com.bond.client.dto.protocol.request.SubscribeRequest;
 import com.bond.client.dto.protocol.response.SubscribeResponse;
@@ -27,9 +26,6 @@ public class BondController {
     private static final Logger logger = LoggerFactory.getLogger(BondController.class);
 
     @Autowired
-    private BondService bondService;
-
-    @Autowired
     private EodService eodService;
 
 
@@ -44,7 +40,6 @@ public class BondController {
         InvestorVO investorVO = request.getInvestorVO();
         TradeDataVO tradeDataVO = request.getTradeDataVO();
 
-        SubscribeResult result = bondService.subscribe(investorVO,bondVO,tradeDataVO);
 
         logger.info("认购响应参数[{}]",response);
         return response;
@@ -61,7 +56,6 @@ public class BondController {
         InvestorVO investorVO = request.getInvestorVO();
         TradeDataVO tradeDataVO = request.getTradeDataVO();
 
-        SubscribeResult result = bondService.subscribe(investorVO,bondVO,tradeDataVO);
 
         logger.info("认购响应参数[{}]",response);
         return response;
